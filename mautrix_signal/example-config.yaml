@@ -280,22 +280,27 @@ bridge:
         # Whether relay mode should be allowed. If allowed, `!signal set-relay` can be used to turn any
         # authenticated user into a relaybot for that chat.
         enabled: false
+        # An array of possible values for the $distinguisher variable in message formats.
+        # Each user gets one of the values here, based on a hash of their user ID.
+        # If the array is empty, the $distinguisher variable will also be empty.
+        user_distinguishers: ["🟦", "🟣", "🟩", "⭕️", "🔶", "⬛️", "🔵", "🟢"]
         # The formats to use when sending messages to Signal via a relay user.
         #
         # Available variables:
         #   $sender_displayname - The display name of the sender (e.g. Example User)
         #   $sender_username    - The username (Matrix ID localpart) of the sender (e.g. exampleuser)
         #   $sender_mxid        - The Matrix ID of the sender (e.g. @exampleuser:example.com)
+        #   $distinguisher      - A random string from the options in the user_distinguishers array.
         #   $message            - The message content
         message_formats:
-            m.text: '$sender_displayname: $message'
-            m.notice: '$sender_displayname: $message'
-            m.emote: '* $sender_displayname $message'
-            m.file: '$sender_displayname sent a file'
-            m.image: '$sender_displayname sent an image'
-            m.audio: '$sender_displayname sent an audio file'
-            m.video: '$sender_displayname sent a video'
-            m.location: '$sender_displayname sent a location'
+            m.text: '$distinguisher $sender_displayname: $message'
+            m.notice: '$distinguisher $sender_displayname: $message'
+            m.emote: '* $distinguisher $sender_displayname $message'
+            m.file: '$distinguisher $sender_displayname sent a file'
+            m.image: '$distinguisher $sender_displayname sent an image'
+            m.audio: '$distinguisher $sender_displayname sent an audio file'
+            m.video: '$distinguisher $sender_displayname sent a video'
+            m.location: '$distinguisher $sender_displayname sent a location'
 
 # Python logging configuration.
 #

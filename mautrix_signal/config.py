@@ -99,6 +99,7 @@ class Config(BaseBridgeConfig):
         copy_dict("bridge.permissions")
 
         copy("bridge.relay.enabled")
+        copy("bridge.relay.user_distinguishers")
         copy_dict("bridge.relay.message_formats")
         copy("bridge.bridge_matrix_leave")
 
